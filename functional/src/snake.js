@@ -125,7 +125,9 @@ const initialState = () => ({
 });
 
 /**
- * @returns void
+ * Creates the next canvas by passing the existing state via spec() and updating it by one frame.
+ * 
+ * @returns object
  */
 const next = spec({
 	rows:  prop('rows'),
@@ -135,6 +137,12 @@ const next = spec({
 	apple: nextApple
 });
 
+/**
+ * Creates a queu of the users actions.
+ * 
+ * @param {*} state 
+ * @param {*} move 
+ */
 const enqueue = (state, move) =>
 	isValidMove(move)(state) ?
 	merge(state)({ moves: state.moves.concat([move]) }) :
