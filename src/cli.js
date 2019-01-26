@@ -60,6 +60,5 @@ const step = () => State = Snake.next(State);
 // Main Screen Logic
 setInterval(() => { 
 	step(); 
-	console.clear(); 
 	show() 
 }, 80);

@@ -14,7 +14,23 @@ const range     = n => m => Array.apply(null, Array(m - n)).map((_, i) => n + i)
 const rep       = c => n => map(k(c))(range(0)(n))
 const rnd       = min => max => Math.floor(Math.random() * max) + min
 const spec      = o => x => Object.keys(o)
-  .map(k => objOf(k)(o[k](x)))
-  .reduce((acc, o) => Object.assign(acc, o))
+	.map(k => objOf(k)(o[k](x)))
+	.reduce((acc, o) => Object.assign(acc, o))
 
-module.exports = { adjust, dropFirst, dropLast, id, k, map, merge, mod, objOf, pipe, prop, range, rep, rnd, spec }
+module.exports = {
+	adjust,
+	dropFirst,
+	dropLast,
+	id,
+	k,
+	map,
+	merge,
+	mod,
+	objOf,
+	pipe,
+	prop,
+	range,
+	rep,
+	rnd,
+	spec
+}
