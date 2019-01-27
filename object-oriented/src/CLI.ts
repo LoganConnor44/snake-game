@@ -1,60 +1,56 @@
 import { GameState } from "./GameState";
+import { OrderedPair } from "./OrderedPair";
+import { CardinalDirections } from "./CardinalDirections";
 
 class CLI {
+    /**
+     * A matrix/grid to represent the game canvas.
+     * @var string[][]
+     */
     public gameCanvas: string[][];
 
+    /**
+     * Sets the gameCanvas as a multidimentional array.
+     * 
+     * @param GameState state 
+     * @returns void
+     */
     createCanvas(state: GameState) {
-        let column = this.createArrayFromString(" · ", state.columns);
-        let row = this.createMultiArray(column, state.rows);
-        
-        this.gameCanvas = row;
+        this.gameCanvas = [];
+        for(let i = 0; i < state.columns; i++) {
+            this.gameCanvas[i] = [];
+            for(let j = 0; j < state.rows; j++) {
+                this.gameCanvas[i][j] = " · ";
+            }
+        }
     }
 
     /**
-     * Creates an array of any given string.
+     * Returns the gameCanvas as a string with return carriages and removing unnecessary commas. 
      * 
-     * @param string item 
-     * @param number numberOfItemsInArray 
-     * @return createArrayFromString("+", 3) returns ["+", "+", "+"]
+     * @retuns string
      */
-    createArrayFromString(item: string, numberOfItemsInArray: number) {
-        let columns: string[] = [];
-        for (let index = 0; index < numberOfItemsInArray; index++) {
-            columns[index] = item;
-        }
-        return columns;
-        //return new Array(numberOfItemsInArray).fill(item);
-    }
-
-    /**
-     * Creates an array of an given array.
-     * 
-     * @param string[] collection 
-     * @param number numberOfArraysInArray
-     * @return createMultiArray(["+", "+", "+"], 2) returns [ [ "+", "+", "+" ], [ "+", "+", "+" ] ]
-     */
-    createMultiArray(collection: string[], numberOfArraysInArray: number) {
-        let columns: string[][] = [];
-        for (let index = 0; index < numberOfArraysInArray; index++) {
-            columns[index] = collection;
-        }
-        return columns;
-        //return new Array(numberOfArraysInArray).fill(collection);
-    }
-
     displayCanvas() {
-        return this.gameCanvas.map(x=>x.concat("\r\n")).join("")
+        return this.gameCanvas.map(x=>x.concat("\r\n").join("")).join("")
     }
 
-    edit() {
-        this.test = [[1,2,3], [4,3,2]];
-        this.test[0][1] = 7;
+    /**
+     * Adds an apple to the gameCanvas.
+     * 
+     * @param OrderedPair location 
+     */
+    addApple(location: OrderedPair) {
+        this.gameCanvas[location.x][location.y] = " @ ";
     }
 
-    addSnake() {
-
+    /**
+     * Adds the snake to the gameCanvas.
+     * 
+     * @param OrderedPair direction 
+     */
+    addSnake(direction: OrderedPair) {
+        this.gameCanvas[direction.x][direction.y] = " \u25A0 ";
     }
-
 }
 
 export { CLI };

@@ -14,7 +14,7 @@ class CardinalDirections {
     );
     static East = new CardinalDirections(
         "East",
-        { x: 1, y: 0 }
+        new OrderedPair(1, 0)
     );
     static West = new CardinalDirections(
         "West",

@@ -5,13 +5,13 @@ import { OrderedPair } from "./OrderedPair";
 
 class Snake extends GameObject {
     public locations: OrderedPair[];
-    public direction: CardinalDirections;
+    public direction: OrderedPair;
 
     constructor() {
         super();
         this.name = "Snake";
         this.locations = [];
-        this.direction = CardinalDirections.East;
+        this.direction = CardinalDirections.East.value;
     }
 
     /**

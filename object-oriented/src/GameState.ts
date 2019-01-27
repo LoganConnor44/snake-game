@@ -8,8 +8,8 @@ class GameState {
     private snake: Snake;
 
     constructor(snake: Snake) {
-        this.columns = 3;
-        this.rows = 7;
+        this.columns = 14;
+        this.rows = 20;
         this.snake = snake;
     }
 }
