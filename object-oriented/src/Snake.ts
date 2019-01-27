@@ -1,4 +1,9 @@
-class Snake extends GameObject{
+import { GameState } from "./GameState";
+import { GameObject } from "./GameObject";
+import { CardinalDirections } from "./CardinalDirections";
+import { OrderedPair } from "./OrderedPair";
+
+class Snake extends GameObject {
     public locations: OrderedPair[];
     public direction: CardinalDirections;
 
@@ -16,8 +21,10 @@ class Snake extends GameObject{
      * @returns boolean
      */
     isValidMove(direction: OrderedPair, state: GameState) {
-        return state.moves[0].x + direction.x != 0 || 
-            state.moves[0].y + direction.y != 0;
+        return state.userInput[0].x + direction.x != 0 || 
+            state.userInput[0].y + direction.y != 0;
     }
 
 }
+
+export { Snake };

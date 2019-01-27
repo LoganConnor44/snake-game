@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
         "module": "commonjs",
+        "target": "es6",
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
-        "outDir": "src/common-js-files/",
-        "target": "es5"
+        "outDir": "src/common-js-files/"
     },
     "include": [
         "src/*"

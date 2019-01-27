@@ -1,3 +1,6 @@
+import { GameState } from "./GameState"; 
+import { OrderedPair } from "./OrderedPair";
+
 class GameLogic {
 
     /**
@@ -47,3 +50,5 @@ class GameLogic {
         return state;
     }
 }
+
+export { GameLogic };

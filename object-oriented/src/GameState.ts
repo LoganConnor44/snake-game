@@ -1,3 +1,6 @@
+import { Snake } from "./Snake"
+import { OrderedPair } from "./OrderedPair";
+
 class GameState {
     public columns: number;
     public rows: number;
@@ -5,8 +8,10 @@ class GameState {
     private snake: Snake;
 
     constructor(snake: Snake) {
-        this.columns = 20;
-        this.rows = 14;
+        this.columns = 3;
+        this.rows = 7;
         this.snake = snake;
     }
 }
+
+export { GameState };

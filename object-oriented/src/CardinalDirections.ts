@@ -1,3 +1,5 @@
+import { OrderedPair } from "./OrderedPair";
+
 /**
  * A mock enum class to easily retrieve cardinal directions.
  */
@@ -33,7 +35,7 @@ class CardinalDirections {
      * 
      * @retuns object
      */
-    get value(): OrderedPair {
+    public get value(): OrderedPair {
         return this._value;
     }
 
@@ -46,3 +48,5 @@ class CardinalDirections {
         return this._key;
     }
 }
+
+export { CardinalDirections };

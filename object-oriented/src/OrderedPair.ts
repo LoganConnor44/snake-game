@@ -6,3 +6,5 @@ class OrderedPair {
         this.y = y;
     }
 }
+
+export { OrderedPair };
