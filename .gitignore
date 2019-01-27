@@ -1,1 +1,3 @@
 /object-oriented/src/common-js-files/
+/object-oriented/node_modules/
+*.DS_Store
