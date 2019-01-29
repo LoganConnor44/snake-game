@@ -15,8 +15,8 @@ class GameLogic {
      * @param OrderedPair orderedPairTwo
      * @returns boolean
      */
-    doPairsMath(orderedPairOne: OrderedPair, orderedPairTwo: OrderedPair) {
-        return orderedPairOne.x == orderedPairTwo.x &&2
+    doPairsMatch(orderedPairOne: OrderedPair, orderedPairTwo: OrderedPair) {
+        return orderedPairOne.x == orderedPairTwo.x &&
             orderedPairOne.y == orderedPairTwo.y;
     }
 

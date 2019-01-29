@@ -19,7 +19,7 @@ class Apple extends GameObject {
      * @returns void
      */
     public setLocation() {
-        this.location = new OrderedPair(1, 11);
+        this.location = new OrderedPair(13, 1);
     }
 }
 

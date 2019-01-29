@@ -3,6 +3,7 @@ import { GameState } from "./GameState";
 import { Snake } from "./Snake";
 import { CLI } from "./CLI";
 import { Apple } from "./Apple";
+import { CardinalDirections } from "./CardinalDirections";
 let readline = require("readline");
 
 // Create Game Objects
@@ -10,11 +11,11 @@ let logic = new GameLogic();
 let snake = new Snake();
 let apple = new Apple();
 let state = new GameState(snake);
-let cli = new CLI();
+let cli = new CLI(state);
 
 // Prep Game Objects
-cli.createCanvas(state); 
-cli.addSnake(snake.direction);
+cli.createCanvas(); 
+cli.addSnake(snake);
 cli.addApple(apple.location);
 
 // Setup Console I/O
@@ -39,29 +40,29 @@ function translateUserInput(userInput: any) {
 	switch (userInput.name.toUpperCase()) {
 		case 'W': 
 		case 'K': 
-        case 'UP':    
-            console.log("the user typed up");
-			//State = Snake.enqueue(State, Snake.NORTH); 
+        case 'UP':
+            snake.direction = CardinalDirections.North.value;
 			break;
 		case 'A':
 		case 'H':
 		case 'LEFT':
-			//State = Snake.enqueue(State, Snake.WEST);
+            snake.direction = CardinalDirections.West.value;
 			break;
 		case 'S':
 		case 'J':
 		case 'DOWN':
-			//State = Snake.enqueue(State, Snake.SOUTH);
+            snake.direction = CardinalDirections.South.value;
 			break;
 		case 'D':
 		case 'L':
 		case 'RIGHT':
-			//State = Snake.enqueue(State, Snake.EAST);
+            snake.direction = CardinalDirections.East.value;
 			break;
 	}
 }
 
 // Main Screen Logic
 setInterval(() => {
-	displayGame() 
-}, 80);
+    displayGame();
+    cli.nextState(snake, apple);
+}, 100);
