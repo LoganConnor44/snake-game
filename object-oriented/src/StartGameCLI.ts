@@ -16,7 +16,7 @@ let cli = new CLI(state);
 // Prep Game Objects
 cli.createCanvas(); 
 cli.addSnake(snake);
-cli.addApple(apple.location);
+cli.addApple(apple);
 
 // Setup Console I/O
 readline.emitKeypressEvents(process.stdin);

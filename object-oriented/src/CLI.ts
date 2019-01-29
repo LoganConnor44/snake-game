@@ -13,16 +13,24 @@ class CLI {
      * @var string[][]
      */
     public gameCanvas: string[][];
+
+    /**
+     * Defines the GameCanvas.
+     * @var OrderedPair
+     */
     private gridDefinition: OrderedPair;
 
+    /**
+     * Define the CLI playable area.
+     * @param GameState state
+     */
     constructor(state: GameState) {
         this.gridDefinition = new OrderedPair(state.columns, state.rows);
     }
 
     /**
-     * Sets the gameCanvas as a multidimentional array.
+     * Sets the gameCanvas as a multidimentional array based on the gridDefinitions.
      * 
-     * @param GameState state 
      * @returns void
      */
     public createCanvas(): void {
@@ -39,32 +47,42 @@ class CLI {
      * Returns the gameCanvas as a string with return carriages and removing unnecessary commas. 
      * 
      * @retuns string
+     * @returns void
      */
-    displayCanvas() {
+    public displayCanvas(): string{
         return this.gameCanvas.map(x=>x.concat("\r\n").join("")).join("")
     }
 
     /**
      * Adds an apple to the gameCanvas.
      * 
-     * @param OrderedPair location 
+     * @param Apple apple
+     * @returns void
      */
-    addApple(location: OrderedPair) {
-        this.gameCanvas[location.x][location.y] = " @ ";
+    public addApple(apple: Apple): void {
+        this.gameCanvas[apple.location.x][apple.location.y] = " @ ";
     }
 
     /**
      * Adds the snake to the gameCanvas.
      * 
-     * @param   
+     * @param Snake snake
+     * @returns void
      */
-    addSnake(snake: Snake) {
+    public addSnake(snake: Snake): void {
         snake.locations.forEach(location => {
             this.gameCanvas[location.y][location.x] = " \u25A0 ";
         });
     }
 
-    nextState(snake: Snake, apple: Apple) {
+    /**
+     * Creates the next state of the game.
+     * 
+     * @param Snake snake 
+     * @param Apple apple 
+     * @returns void
+     */
+    public nextState(snake: Snake, apple: Apple): void {
         snake.move();
         this.stayOnCanvas(snake);
         this.createCanvas();
@@ -72,6 +90,12 @@ class CLI {
         this.gameCanvas[apple.location.y][apple.location.x] = " @ ";
     }
 
+    /**
+     * Keeps the snake in the game boundary.
+     * 
+     * @param Snake snake 
+     * @returns void
+     */
     private stayOnCanvas(snake: Snake): void {
         let xBoundary = this.gameCanvas[0].length - 1;
         let yBoundary = this.gameCanvas.length - 1; 

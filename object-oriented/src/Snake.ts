@@ -4,11 +4,30 @@ import { CardinalDirections } from "./CardinalDirections";
 import { OrderedPair } from "./OrderedPair";
 
 class Snake extends GameObject {
+    /**
+     * Defines all locations of the Snake.
+     * @var OrderedPair[]
+     */
     public locations: OrderedPair[];
+    /**
+     * Defines the location of the snake head.
+     * @var OrderedPair
+     */
     public location: OrderedPair;
+    /**
+     * Defines the CardinalDirection of the snake.
+     * @var OrderedPair
+     */
     public direction: OrderedPair;
+    /**
+     * Defines the current size of the snake.
+     * @var Number
+     */
     public size: Number;
 
+    /**
+     * Initializes the snake with default values.
+     */
     constructor() {
         super();
         this.name = "Snake";
@@ -29,10 +48,21 @@ class Snake extends GameObject {
             state.userInput[0].y + direction.y != 0;
     }
 
+    /**
+     * Adds an OrderedPair to snake's property, location.
+     * 
+     * @returns void
+     */
     public move(): void {
         this.location = this.nextHead();
     }
 
+    /**
+     * Evaluates the snake's next location by adding the 
+     * current location with a CardinalDirection.
+     * 
+     * @returns OrderedPair
+     */
     private nextHead(): OrderedPair {
         let nextlocation = new OrderedPair(
             this.direction.x + this.location.x,

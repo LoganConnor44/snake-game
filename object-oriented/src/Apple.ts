@@ -2,6 +2,10 @@ import { GameObject } from "./GameObject";
 import { OrderedPair } from "./OrderedPair";
 
 class Apple extends GameObject {
+    /**
+     * Defines the location of the Apple.
+     * @var OrderedPair
+     */
     public location: OrderedPair;
 
     /**
@@ -16,6 +20,7 @@ class Apple extends GameObject {
     /**
      * Sets the Apple's location to a random OrderedPair.
      * 
+     * @todo Actually create a random location.
      * @returns void
      */
     public setLocation() {

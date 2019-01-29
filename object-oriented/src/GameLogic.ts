@@ -4,6 +4,7 @@ import { OrderedPair } from "./OrderedPair";
 class GameLogic {
 
     /**
+     * Defines the state of the current game.
      * @var GameState
      */
     public currentState: GameState;
@@ -13,9 +14,9 @@ class GameLogic {
      * 
      * @param OrderedPair orderedPairOne
      * @param OrderedPair orderedPairTwo
-     * @returns boolean
+     * @returns Boolean
      */
-    doPairsMatch(orderedPairOne: OrderedPair, orderedPairTwo: OrderedPair) {
+    doPairsMatch(orderedPairOne: OrderedPair, orderedPairTwo: OrderedPair): Boolean {
         return orderedPairOne.x == orderedPairTwo.x &&
             orderedPairOne.y == orderedPairTwo.y;
     }
@@ -25,9 +26,9 @@ class GameLogic {
      * 
      * @param OrderedPair userInput
      * @param GameState state
-     * @returns boolean
+     * @returns Boolean
      */
-    isDirectionValid(userInput: OrderedPair, state: GameState) {
+    isDirectionValid(userInput: OrderedPair, state: GameState): Boolean {
         return state.userInput[0].x + userInput.x != 0 || 
             state.userInput[0].y + userInput.y != 0;
     }
@@ -45,6 +46,7 @@ class GameLogic {
             var newInput = { 
                 userInput: state.userInput.concat([userInput])
             };
+            // rework this part so returning GameState is allowed by type check
             return {...state, ...newInput};
         }
         return state;
