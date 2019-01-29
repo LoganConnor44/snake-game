@@ -6,11 +6,11 @@ import { OrderedPair } from "./OrderedPair";
 class CardinalDirections {
     static North = new CardinalDirections(
         "North", 
-        { x: 0, y: -1 } 
+        new OrderedPair(0, -1) 
     );
     static South = new CardinalDirections(
         "South",
-        { x: 0, y: 1 }
+        new OrderedPair(0, 1)
     );
     static East = new CardinalDirections(
         "East",
@@ -18,7 +18,7 @@ class CardinalDirections {
     );
     static West = new CardinalDirections(
         "West",
-        { x: -1, y: 0 }
+        new OrderedPair(-1, 0)
     );
 
     /**
