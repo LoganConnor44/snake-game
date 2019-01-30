@@ -53,15 +53,6 @@ class CLI {
         return this.gameCanvas.map(x=>x.concat("\r\n").join("")).join("")
     }
 
-    /**
-     * Adds an apple to the gameCanvas.
-     * 
-     * @param Apple apple
-     * @returns void
-     */
-    public addApple(apple: Apple): void {
-        this.gameCanvas[apple.location.x][apple.location.y] = " @ ";
-    }
 
     /**
      * Adds the snake to the gameCanvas.
@@ -75,6 +66,10 @@ class CLI {
         });
     }
 
+    public addApple(apple: Apple) {
+        this.gameCanvas[apple.location.y][apple.location.x]= " @ ";
+    }
+
     /**
      * Creates the next state of the game.
      * 
@@ -83,11 +78,30 @@ class CLI {
      * @returns void
      */
     public nextState(snake: Snake, apple: Apple): void {
+        
         snake.move();
         this.stayOnCanvas(snake);
         this.createCanvas();
-        this.gameCanvas[snake.location.y][snake.location.x] = " \u25A0 ";
-        this.gameCanvas[apple.location.y][apple.location.x] = " @ ";
+        if (!this.doPairsMatch(snake.location, apple.location)) {
+            snake.staySameSize();
+        } else {
+            snake.grow();
+            apple.move();
+        }
+        this.addApple(apple);
+        this.addSnake(snake);
+    }
+
+    /**
+     * Identifies if the two ordered-pairs passed in are identical.
+     * 
+     * @param OrderedPair orderedPairOne
+     * @param OrderedPair orderedPairTwo
+     * @returns Boolean
+     */
+    doPairsMatch(orderedPairOne: OrderedPair, orderedPairTwo: OrderedPair): Boolean {
+        return orderedPairOne.x == orderedPairTwo.x &&
+            orderedPairOne.y == orderedPairTwo.y;
     }
 
     /**

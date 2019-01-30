@@ -26,6 +26,13 @@ class Apple extends GameObject {
     public setLocation() {
         this.location = new OrderedPair(13, 1);
     }
+
+    public move() {
+        this.location = new OrderedPair(
+            Math.floor(Math.random() * 14), 
+            Math.floor(Math.random() * 14)
+        );
+    }
 }
 
 export { Apple };

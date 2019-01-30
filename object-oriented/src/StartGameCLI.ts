@@ -64,5 +64,6 @@ function translateUserInput(userInput: any) {
 // Main Screen Logic
 setInterval(() => {
     displayGame();
-    cli.nextState(snake, apple);
-}, 100);
+	cli.nextState(snake, apple);
+	console.log(snake);
+}, 200);

@@ -2,6 +2,7 @@ import { GameState } from "./GameState";
 import { GameObject } from "./GameObject";
 import { CardinalDirections } from "./CardinalDirections";
 import { OrderedPair } from "./OrderedPair";
+import { Apple } from "./Apple";
 
 class Snake extends GameObject {
     /**
@@ -21,9 +22,9 @@ class Snake extends GameObject {
     public direction: OrderedPair;
     /**
      * Defines the current size of the snake.
-     * @var Number
+     * @var number
      */
-    public size: Number;
+    public size: number;
 
     /**
      * Initializes the snake with default values.
@@ -34,7 +35,7 @@ class Snake extends GameObject {
         this.location = new OrderedPair(1, 1);
         this.locations = [this.location];
         this.direction = CardinalDirections.East.value;
-        this.size = 1
+        this.size = 1;
     }
 
     /**
@@ -48,6 +49,11 @@ class Snake extends GameObject {
             state.userInput[0].y + direction.y != 0;
     }
 
+    didSnakeEat(apple: Apple): Boolean {
+        return this.locations[0].x == apple.location.x &&
+        this.locations[0].y == apple.location.y;
+    }
+
     /**
      * Adds an OrderedPair to snake's property, location.
      * 
@@ -55,6 +61,15 @@ class Snake extends GameObject {
      */
     public move(): void {
         this.location = this.nextHead();
+        this.saveHistory();
+    }
+
+    public grow(): void {
+        this.size++;
+    }
+
+    public staySameSize() {
+        this.locations = this.locations.slice(1);
     }
 
     /**
@@ -69,6 +84,14 @@ class Snake extends GameObject {
             this.direction.y + this.location.y
         );
         return nextlocation;
+    }
+
+    private saveHistory() {
+        this.locations.push(this.location);
+    }
+
+    private nextBody(): void {
+        this.locations.push(this.location);
     }
 
 }
