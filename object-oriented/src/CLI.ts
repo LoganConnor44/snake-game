@@ -1,7 +1,5 @@
-import { GameState } from "./GameState";
 import { OrderedPair } from "./OrderedPair";
 import { Snake } from "./Snake";
-import { CardinalDirections } from "./CardinalDirections";
 import { Apple } from "./Apple";
 
 class CLI {
@@ -22,10 +20,11 @@ class CLI {
 
     /**
      * Define the CLI playable area.
-     * @param GameState state
+     * @param number columns
+     * @param number rows
      */
-    constructor(state: GameState) {
-        this.gridDefinition = new OrderedPair(state.columns, state.rows);
+    constructor(columns: number, rows: number) {
+        this.gridDefinition = new OrderedPair(columns, rows);
     }
 
     /**
@@ -62,11 +61,17 @@ class CLI {
      */
     public addSnake(snake: Snake): void {
         snake.locations.forEach(location => {
-            this.gameCanvas[location.y][location.x] = " \u25A0 ";
+            this.gameCanvas[location.y][location.x] = " \u2610 ";
         });
     }
 
-    public addApple(apple: Apple) {
+    /**
+     * Adds the apple to the gameCanvas.
+     * 
+     * @param Apple apple 
+     * @returns void
+     */
+    public addApple(apple: Apple): void {
         this.gameCanvas[apple.location.y][apple.location.x]= " @ ";
     }
 
@@ -78,15 +83,21 @@ class CLI {
      * @returns void
      */
     public nextState(snake: Snake, apple: Apple): void {
-        
         snake.move();
         this.stayOnCanvas(snake);
         this.createCanvas();
-        if (!this.doPairsMatch(snake.location, apple.location)) {
-            snake.staySameSize();
+        if (!this.didSnakeEat(snake.location, apple.location)) {
+            snake.remainCurrentSize();
         } else {
             snake.grow();
-            apple.move();
+            apple.move(
+                this.gameCanvas[0].length,
+                this.gameCanvas.length
+            );
+        }
+        if (this.didSnakeEatItself(snake)) {
+            snake.size = 1;
+            snake.locations = [snake.location];
         }
         this.addApple(apple);
         this.addSnake(snake);
@@ -99,9 +110,27 @@ class CLI {
      * @param OrderedPair orderedPairTwo
      * @returns Boolean
      */
-    doPairsMatch(orderedPairOne: OrderedPair, orderedPairTwo: OrderedPair): Boolean {
+    private didSnakeEat(orderedPairOne: OrderedPair, orderedPairTwo: OrderedPair): Boolean {
         return orderedPairOne.x == orderedPairTwo.x &&
             orderedPairOne.y == orderedPairTwo.y;
+    }
+
+    /**
+     * 
+     */
+    private didSnakeEatItself(snake: Snake): Boolean {
+        if (snake.size > 1) {
+            let bodyLocations = snake.locations.slice(
+                0,
+                snake.locations.length -1 
+            );
+            if (bodyLocations.find(location => 
+                location.x == snake.location.x && 
+                location.y == snake.location.y)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

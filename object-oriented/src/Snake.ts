@@ -1,8 +1,6 @@
-import { GameState } from "./GameState";
 import { GameObject } from "./GameObject";
 import { CardinalDirections } from "./CardinalDirections";
 import { OrderedPair } from "./OrderedPair";
-import { Apple } from "./Apple";
 
 class Snake extends GameObject {
     /**
@@ -39,22 +37,6 @@ class Snake extends GameObject {
     }
 
     /**
-     * Identifies if the user attempts to have the snake move on top of itself.
-     * 
-     * @param {*} move
-     * @returns boolean
-     */
-    isValidMove(direction: OrderedPair, state: GameState): Boolean {
-        return state.userInput[0].x + direction.x != 0 || 
-            state.userInput[0].y + direction.y != 0;
-    }
-
-    didSnakeEat(apple: Apple): Boolean {
-        return this.locations[0].x == apple.location.x &&
-        this.locations[0].y == apple.location.y;
-    }
-
-    /**
      * Adds an OrderedPair to snake's property, location.
      * 
      * @returns void
@@ -64,11 +46,20 @@ class Snake extends GameObject {
         this.saveHistory();
     }
 
+    /**
+     * Increases the size variable that defines how large the snake by 
+     * tell the game how many locations to keep.
+     * 
+     * @returns void
+     */
     public grow(): void {
         this.size++;
     }
 
-    public staySameSize() {
+    /**
+     * @returns void
+     */
+    public remainCurrentSize(): void {
         this.locations = this.locations.slice(1);
     }
 
@@ -86,11 +77,12 @@ class Snake extends GameObject {
         return nextlocation;
     }
 
-    private saveHistory() {
-        this.locations.push(this.location);
-    }
-
-    private nextBody(): void {
+    /**
+     * Keep a history of the snake's position.
+     * 
+     * @returns void
+     */
+    private saveHistory(): void {
         this.locations.push(this.location);
     }
 

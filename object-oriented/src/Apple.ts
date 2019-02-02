@@ -27,10 +27,17 @@ class Apple extends GameObject {
         this.location = new OrderedPair(13, 1);
     }
 
-    public move() {
+    /**
+     * Randomly moves the apple to a random location.
+     * 
+     * @param number columns 
+     * @param number rows
+     * @returns void
+     */
+    public move(columns: number, rows: number): void {
         this.location = new OrderedPair(
-            Math.floor(Math.random() * 14), 
-            Math.floor(Math.random() * 14)
+            Math.floor(Math.random() * columns), 
+            Math.floor(Math.random() * rows)
         );
     }
 }

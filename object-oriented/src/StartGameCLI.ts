@@ -1,5 +1,4 @@
 import { GameLogic } from "./GameLogic";
-import { GameState } from "./GameState";
 import { Snake } from "./Snake";
 import { CLI } from "./CLI";
 import { Apple } from "./Apple";
@@ -10,8 +9,7 @@ let readline = require("readline");
 let logic = new GameLogic();
 let snake = new Snake();
 let apple = new Apple();
-let state = new GameState(snake);
-let cli = new CLI(state);
+let cli = new CLI(14,20);
 
 // Prep Game Objects
 cli.createCanvas(); 
@@ -65,5 +63,4 @@ function translateUserInput(userInput: any) {
 setInterval(() => {
     displayGame();
 	cli.nextState(snake, apple);
-	console.log(snake);
-}, 200);
+}, 100);
