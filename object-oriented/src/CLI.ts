@@ -1,30 +1,16 @@
 import { OrderedPair } from "./OrderedPair";
 import { Snake } from "./Snake";
 import { Apple } from "./Apple";
+import { GameLogic } from "./GameLogic";
 
-class CLI {
-    /**
-     * A matrix/grid to represent the game canvas.
-     * NOTE: When assigning x and y values the think of the inner
-     *       array as y, and the outer as x. The grid's north and 
-     *       south directions may be mixed.
-     * @var string[][]
-     */
-    public gameCanvas: string[][];
-
-    /**
-     * Defines the GameCanvas.
-     * @var OrderedPair
-     */
-    private gridDefinition: OrderedPair;
-
+class CLI extends GameLogic {
     /**
      * Define the CLI playable area.
      * @param number columns
      * @param number rows
      */
     constructor(columns: number, rows: number) {
-        this.gridDefinition = new OrderedPair(columns, rows);
+        super(columns, rows);
     }
 
     /**
@@ -103,35 +89,7 @@ class CLI {
         this.addSnake(snake);
     }
 
-    /**
-     * Identifies if the two ordered-pairs passed in are identical.
-     * 
-     * @param OrderedPair orderedPairOne
-     * @param OrderedPair orderedPairTwo
-     * @returns Boolean
-     */
-    private didSnakeEat(orderedPairOne: OrderedPair, orderedPairTwo: OrderedPair): Boolean {
-        return orderedPairOne.x == orderedPairTwo.x &&
-            orderedPairOne.y == orderedPairTwo.y;
-    }
-
-    /**
-     * 
-     */
-    private didSnakeEatItself(snake: Snake): Boolean {
-        if (snake.size > 1) {
-            let bodyLocations = snake.locations.slice(
-                0,
-                snake.locations.length -1 
-            );
-            if (bodyLocations.find(location => 
-                location.x == snake.location.x && 
-                location.y == snake.location.y)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 
     /**
      * Keeps the snake in the game boundary.

@@ -1,4 +1,3 @@
-import { GameLogic } from "./GameLogic";
 import { Snake } from "./Snake";
 import { CLI } from "./CLI";
 import { Apple } from "./Apple";
@@ -6,7 +5,6 @@ import { CardinalDirections } from "./CardinalDirections";
 let readline = require("readline");
 
 // Create Game Objects
-let logic = new GameLogic();
 let snake = new Snake();
 let apple = new Apple();
 let cli = new CLI(14,20);
@@ -28,6 +26,12 @@ function displayGame() {
     console.log(
         '\x1Bc' + cli.displayCanvas()
     );
+}
+
+function displayScore() {
+	console.log(
+		"Apples eaten: " + (snake.size - 1)
+	);
 }
 
 // Processes The User's Input
@@ -61,6 +65,7 @@ function translateUserInput(userInput: any) {
 
 // Main Screen Logic
 setInterval(() => {
-    displayGame();
+	displayGame();
+	displayScore();
 	cli.nextState(snake, apple);
-}, 100);
+}, 125);
