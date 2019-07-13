@@ -6,4 +6,4 @@
 
 ## Object Oriented Implementation
 
-`node object-oriented/src/common-js/StartGameCli.js`
+`node object-oriented/src/common-js-files/StartGameCli.js`
